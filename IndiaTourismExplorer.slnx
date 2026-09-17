@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="IndiaTourismExplorer.API/IndiaTourismExplorer.API.csproj" />
+  <Project Path="IndiaTourismExplorer.Application/IndiaTourismExplorer.Application.csproj" Id="685b11ea-d0b3-432c-9aac-38895e55ea97" />
+  <Project Path="IndiaTourismExplorer.Domain/IndiaTourismExplorer.Domain.csproj" Id="8d886ff0-f297-4a53-bd91-95952902147a" />
+  <Project Path="IndiaTourismExplorer.Infrastructure/IndiaTourismExplorer.Infrastructure.csproj" Id="ad655153-8de2-444f-a13c-226e86b1bc99" />
+</Solution>

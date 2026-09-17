@@ -1,0 +1,6 @@
+@IndiaTourismExplorer.API_HostAddress = http://localhost:5294
+
+GET {{IndiaTourismExplorer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
