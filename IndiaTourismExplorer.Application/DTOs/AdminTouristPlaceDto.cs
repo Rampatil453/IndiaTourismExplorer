@@ -6,15 +6,17 @@ public class AdminTouristPlaceDto
 
     public string Name { get; set; } = string.Empty;
 
+    public string? ShortDescription { get; set; }
+
     public string? Description { get; set; }
 
     public int LocationId { get; set; }
 
     public string? Address { get; set; }
 
-    public double? Latitude { get; set; }
+    public decimal? Latitude { get; set; }
 
-    public double? Longitude { get; set; }
+    public decimal? Longitude { get; set; }
 
     public bool IsFeatured { get; set; }
 

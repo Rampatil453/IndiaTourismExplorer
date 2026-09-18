@@ -166,4 +166,66 @@ public class TouristPlaceService : ITouristPlaceService
                 .ToList()
         };
     }
+    public async Task<bool> CreateAsync(AdminTouristPlaceDto dto)
+    {
+        var touristPlace = new Domain.Entities.TouristPlace
+        {
+            Name = dto.Name,
+            ShortDescription = dto.ShortDescription,
+            Description = dto.Description,
+            LocationId = dto.LocationId,
+            Address = dto.Address,
+            Latitude = dto.Latitude,
+            Longitude = dto.Longitude,
+            IsFeatured = dto.IsFeatured,
+            IsActive = dto.IsActive
+        };
+
+        await _repository.AddAsync(touristPlace);
+        await _repository.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> UpdateAsync(
+        int id,
+        AdminTouristPlaceDto dto)
+    {
+        var touristPlace = await _repository.GetByIdAsync(id);
+
+        if (touristPlace == null)
+        {
+            return false;
+        }
+
+        touristPlace.Name = dto.Name;
+        touristPlace.ShortDescription = dto.ShortDescription;
+        touristPlace.Description = dto.Description;
+        touristPlace.LocationId = dto.LocationId;
+        touristPlace.Address = dto.Address;
+        touristPlace.Latitude = dto.Latitude;
+        touristPlace.Longitude = dto.Longitude;
+        touristPlace.IsFeatured = dto.IsFeatured;
+        touristPlace.IsActive = dto.IsActive;
+
+        _repository.Update(touristPlace);
+        await _repository.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var touristPlace = await _repository.GetByIdAsync(id);
+
+        if (touristPlace == null)
+        {
+            return false;
+        }
+
+        _repository.Remove(touristPlace);
+        await _repository.SaveChangesAsync();
+
+        return true;
+    }
 }

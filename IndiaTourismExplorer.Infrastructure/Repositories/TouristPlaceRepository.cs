@@ -80,4 +80,24 @@ public class TouristPlaceRepository : ITouristPlaceRepository
             .OrderBy(x => x.Name)
             .ToListAsync();
     }
+
+    public async Task AddAsync(TouristPlace touristPlace)
+    {
+        await _context.TouristPlaces.AddAsync(touristPlace);
+    }
+
+    public void Update(TouristPlace touristPlace)
+    {
+        _context.TouristPlaces.Update(touristPlace);
+    }
+
+    public void Remove(TouristPlace touristPlace)
+    {
+        _context.TouristPlaces.Remove(touristPlace);
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
 }

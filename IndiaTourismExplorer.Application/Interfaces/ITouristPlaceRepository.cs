@@ -15,8 +15,6 @@ public interface ITouristPlaceRepository
 
     Task<List<TouristPlace>> GetByCategoryIdAsync(int categoryId);
 
-    Task<TouristPlace?> GetByIdAsync(int id);
-
     Task AddAsync(TouristPlace touristPlace);
 
     void Update(TouristPlace touristPlace);

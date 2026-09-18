@@ -13,4 +13,10 @@ public interface ITouristPlaceService
 
     Task<TouristPlaceDetailsDto?> GetDetailsByIdAsync(int id);
     Task<List<TouristPlaceDto>> GetByCategoryIdAsync(int categoryId);
+
+    Task<bool> CreateAsync(AdminTouristPlaceDto dto);
+
+    Task<bool> UpdateAsync(int id, AdminTouristPlaceDto dto);
+
+    Task<bool> DeleteAsync(int id);
 }
