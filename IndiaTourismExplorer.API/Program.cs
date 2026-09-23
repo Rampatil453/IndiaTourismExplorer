@@ -118,6 +118,16 @@ builder.Services.AddScoped<
     ITouristPlaceService,
     TouristPlaceService>();
 
+// =====================================================
+// Dependency Injection - User
+// =====================================================
+builder.Services.AddScoped<
+    IAdminUserRepository,
+    AdminUserRepository>();
+builder.Services.AddScoped<
+    IAdminUserService,
+    AdminUserService>();
+
 
 // =====================================================
 // Dependency Injection - Category
