@@ -50,4 +50,16 @@ public class StateRepository : IStateRepository
     {
         await _context.SaveChangesAsync();
     }
+
+    public async Task<State?> GetByIdForAdminAsync(int id)
+    {
+        return await _context.States
+            .FirstOrDefaultAsync(x => x.StateId == id);
+    }
+
+    public void Remove(State state)
+    {
+        _context.States.Remove(state);
+    }
+
 }

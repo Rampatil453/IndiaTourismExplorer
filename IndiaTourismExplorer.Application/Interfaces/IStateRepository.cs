@@ -15,4 +15,11 @@ public interface IStateRepository
     void Delete(State state);
 
     Task SaveChangesAsync();
+
+    Task<State?> GetByIdForAdminAsync(int id);
+    void Remove(State state);
+
+
+
+
 }

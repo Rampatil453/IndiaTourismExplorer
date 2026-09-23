@@ -44,4 +44,62 @@ public class StateService : IStateService
             ImageUrl = state.ImageUrl
         };
     }
+    public async Task<bool> CreateAsync(AdminStateDto dto)
+    {
+        var state = new Domain.Entities.State
+        {
+            Name = dto.Name,
+            Code = dto.Code,
+            Description = dto.Description,
+            ImageUrl = dto.ImageUrl,
+            IsActive = dto.IsActive,
+            CreatedAt = DateTime.UtcNow
+        };
+
+        await _stateRepository.AddAsync(state);
+        await _stateRepository.SaveChangesAsync();
+
+        return true;
+    }
+    public async Task<bool> UpdateAsync(
+    int id,
+    AdminStateDto dto)
+    {
+        var state = await _stateRepository
+            .GetByIdForAdminAsync(id);
+
+        if (state == null)
+        {
+            return false;
+        }
+
+        state.Name = dto.Name;
+        state.Code = dto.Code;
+        state.Description = dto.Description;
+        state.ImageUrl = dto.ImageUrl;
+        state.IsActive = dto.IsActive;
+        state.UpdatedAt = DateTime.UtcNow;
+
+        _stateRepository.Update(state);
+        await _stateRepository.SaveChangesAsync();
+
+        return true;
+    }
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var state = await _stateRepository
+            .GetByIdForAdminAsync(id);
+
+        if (state == null)
+        {
+            return false;
+        }
+
+        _stateRepository.Delete(state);
+
+        await _stateRepository.SaveChangesAsync();
+
+        return true;
+    }
+
 }
