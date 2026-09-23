@@ -27,4 +27,30 @@ public class LocationRepository : ILocationRepository
         return await _context.Locations
             .FirstOrDefaultAsync(x => x.LocationId == id && x.IsActive);
     }
+    public async Task<Location?> GetByIdForAdminAsync(int id)
+    {
+        return await _context.Locations
+            .FirstOrDefaultAsync(x => x.LocationId == id);
+    }
+    public async Task AddAsync(Location location)
+    {
+        await _context.Locations.AddAsync(location);
+    }
+    public void Update(Location location)
+    {
+        _context.Locations.Update(location);
+    }
+    public void Remove(Location location)
+    {
+        _context.Locations.Remove(location);
+    }
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
+    public async Task<bool> HasTouristPlacesAsync(int locationId)
+    {
+        return await _context.TouristPlaces
+            .AnyAsync(tp => tp.LocationId == locationId);
+    }
 }
