@@ -59,8 +59,25 @@ public class AdminUserService : IAdminUserService
             Email = user.Email ?? string.Empty,
             PhoneNumber = user.PhoneNumber,
             EmailConfirmed = user.EmailConfirmed,
-            IsActive = true,
+            IsActive = user.IsActive,
             Roles = roles.ToList()
         };
+    }
+    public async Task<bool> UpdateStatusAsync(
+    string userId,
+    bool isActive)
+    {
+        var user = await _repository.GetByIdAsync(userId);
+
+        if (user == null)
+        {
+            return false;
+        }
+
+        user.IsActive = isActive;
+
+        await _repository.SaveChangesAsync();
+
+        return true;
     }
 }

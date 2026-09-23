@@ -14,6 +14,7 @@ namespace IndiaTourismExplorer.Domain.Entities
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+        public bool IsActive { get; set; } = true;
 
         // Navigation properties
 
@@ -28,5 +29,6 @@ namespace IndiaTourismExplorer.Domain.Entities
 
         public ICollection<Feedback> Feedbacks { get; set; }
             = new List<Feedback>();
+
     }
 }

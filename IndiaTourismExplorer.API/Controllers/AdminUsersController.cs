@@ -37,4 +37,20 @@ public class AdminUsersController : ControllerBase
 
         return Ok(user);
     }
+    [HttpPut("{userId}/status")]
+    public async Task<IActionResult> UpdateStatus(
+    string userId,
+    [FromBody] bool isActive)
+    {
+        var result = await _userService.UpdateStatusAsync(
+            userId,
+            isActive);
+
+        if (!result)
+        {
+            return NotFound("User not found.");
+        }
+
+        return Ok("User status updated successfully.");
+    }
 }
