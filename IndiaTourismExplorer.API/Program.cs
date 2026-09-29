@@ -41,7 +41,10 @@ builder.Services.AddCors(options =>
 // =====================================================
 // Database
 // =====================================================
-
+Console.WriteLine(
+    "CONNECTION STRING: " +
+    builder.Configuration.GetConnectionString("DefaultConnection")
+);
 builder.Services.AddDbContext<TourismDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
@@ -229,15 +232,16 @@ using (var scope = app.Services.CreateScope())
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint(
-            "/swagger/v1/swagger.json",
-            "IndiaTourismExplorer API v1");
-    });
+   
 }
+app.UseSwagger();
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint(
+        "/swagger/v1/swagger.json",
+        "IndiaTourismExplorer API v1");
+});
 
 
 // =====================================================

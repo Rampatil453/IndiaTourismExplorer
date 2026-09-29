@@ -13,6 +13,13 @@ public static class DbSeeder
     RoleManager<IdentityRole> roleManager,
     IConfiguration configuration)
     {
+        Console.WriteLine("SEEDER STARTED");
+
+        await context.Database.OpenConnectionAsync();
+
+        Console.WriteLine("DATABASE CONNECTION SUCCESSFUL");
+
+        await context.Database.CloseConnectionAsync();
         // Seed States
         if (!await context.States.AnyAsync())
         {

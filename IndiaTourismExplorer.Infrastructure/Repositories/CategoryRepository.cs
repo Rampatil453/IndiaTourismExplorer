@@ -29,4 +29,30 @@ public class CategoryRepository : ICategoryRepository
                 x.CategoryId == id &&
                 x.IsActive);
     }
+
+    public async Task<Category?> GetByIdForAdminAsync(int id)
+    {
+        return await _context.Categories
+            .FirstOrDefaultAsync(x => x.CategoryId == id);
+    }
+
+    public async Task AddAsync(Category category)
+    {
+        await _context.Categories.AddAsync(category);
+    }
+
+    public void Update(Category category)
+    {
+        _context.Categories.Update(category);
+    }
+
+    public void Remove(Category category)
+    {
+        _context.Categories.Remove(category);
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
 }
