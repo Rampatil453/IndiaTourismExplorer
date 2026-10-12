@@ -197,6 +197,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddScoped<IAdminFeedbackRepository, AdminFeedbackRepository>();
 builder.Services.AddScoped<IAdminFeedbackService, AdminFeedbackService>();
 
+builder.Services.AddScoped<IAdminTouristPlaceImageRepository, AdminTouristPlaceImageRepository>();
+builder.Services.AddScoped<IAdminTouristPlaceImageService, AdminTouristPlaceImageService>();
 // =====================================================
 // Build Application
 // =====================================================
