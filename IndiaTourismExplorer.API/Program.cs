@@ -194,7 +194,8 @@ builder.Services.AddSwaggerGen(options =>
                 document)] = []
         });
 });
-
+builder.Services.AddScoped<IAdminFeedbackRepository, AdminFeedbackRepository>();
+builder.Services.AddScoped<IAdminFeedbackService, AdminFeedbackService>();
 
 // =====================================================
 // Build Application
