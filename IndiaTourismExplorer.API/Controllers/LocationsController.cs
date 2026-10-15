@@ -1,11 +1,13 @@
 ﻿using IndiaTourismExplorer.Application.DTOs;
 using IndiaTourismExplorer.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IndiaTourismExplorer.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+
 public class LocationsController : ControllerBase
 {
     private readonly ILocationService _locationService;

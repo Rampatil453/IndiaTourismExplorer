@@ -202,7 +202,12 @@ builder.Services.AddScoped<IAdminTouristPlaceImageService, AdminTouristPlaceImag
 // =====================================================
 // Build Application
 // =====================================================
-
+builder.Services.AddScoped<IAdminTouristPlaceHighlightRepository, AdminTouristPlaceHighlightRepository>();
+builder.Services.AddScoped<IAdminTouristPlaceHighlightService, AdminTouristPlaceHighlightService>();
+builder.Services.AddScoped<IAdminVisitingInformationRepository, AdminVisitingInformationRepository>();
+builder.Services.AddScoped<IAdminVisitingInformationService, AdminVisitingInformationService>();
+builder.Services.AddScoped<IAdminTravelOptionRepository, AdminTravelOptionRepository>();
+builder.Services.AddScoped<IAdminTravelOptionService, AdminTravelOptionService>();
 var app = builder.Build();
 
 

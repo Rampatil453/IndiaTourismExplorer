@@ -1,11 +1,13 @@
 ﻿using IndiaTourismExplorer.Application.DTOs;
 using IndiaTourismExplorer.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IndiaTourismExplorer.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize(Roles = "Admin")]
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryService _categoryService;

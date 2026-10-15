@@ -11,7 +11,7 @@ namespace IndiaTourismExplorer.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<TouristPlaceHighlight> builder)
         {
-            builder.HasKey(x => x.HighlightId);
+            builder.HasKey(x => x.TouristPlaceHighlightId);
 
             builder.Property(x => x.Title)
                 .IsRequired()

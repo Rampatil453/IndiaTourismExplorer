@@ -78,7 +78,7 @@ public class TouristPlaceService : ITouristPlaceService
                 .OrderBy(x => x.DisplayOrder)
                 .Select(x => new TouristPlaceHighlightDto
                 {
-                    HighlightId = x.HighlightId,
+                    HighlightId = x.TouristPlaceHighlightId,
                     Title = x.Title,
                     Description = x.Description,
                     DisplayOrder = x.DisplayOrder

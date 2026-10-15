@@ -467,11 +467,11 @@ namespace IndiaTourismExplorer.Infrastructure.Migrations
 
             modelBuilder.Entity("IndiaTourismExplorer.Domain.Entities.TouristPlaceHighlight", b =>
                 {
-                    b.Property<int>("HighlightId")
+                    b.Property<int>("TouristPlaceHighlightId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HighlightId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TouristPlaceHighlightId"));
 
                     b.Property<string>("Description")
                         .HasMaxLength(500)
@@ -479,6 +479,11 @@ namespace IndiaTourismExplorer.Infrastructure.Migrations
 
                     b.Property<int>("DisplayOrder")
                         .HasColumnType("int");
+
+                    b.Property<string>("HighlightText")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -488,7 +493,7 @@ namespace IndiaTourismExplorer.Infrastructure.Migrations
                     b.Property<int>("TouristPlaceId")
                         .HasColumnType("int");
 
-                    b.HasKey("HighlightId");
+                    b.HasKey("TouristPlaceHighlightId");
 
                     b.HasIndex("TouristPlaceId", "DisplayOrder");
 

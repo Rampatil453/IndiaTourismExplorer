@@ -1,5 +1,6 @@
 ﻿using IndiaTourismExplorer.Application.DTOs;
 using IndiaTourismExplorer.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace IndiaTourismExplorer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public sealed class AdminTouristPlaceImagesController : ControllerBase
     {
         private readonly IAdminTouristPlaceImageService _service;
