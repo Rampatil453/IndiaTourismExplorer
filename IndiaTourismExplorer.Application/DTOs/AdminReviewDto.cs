@@ -1,4 +1,6 @@
-﻿namespace IndiaTourismExplorer.Application.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace IndiaTourismExplorer.Application.DTOs;
 
 public class AdminReviewDto
 {
@@ -16,7 +18,13 @@ public class AdminReviewDto
 
     public string? Comment { get; set; }
 
-    public string Status { get; set; } = string.Empty;
+    public string Status { get; set; } = "";
 
     public DateTime CreatedAt { get; set; }
+}
+public sealed class UpdateReviewStatusDto
+{
+    [Required]
+    [RegularExpression("^(Approved|Rejected)$", ErrorMessage = "Status must be Approved or Rejected.")]
+    public string Status { get; set; } = "";
 }

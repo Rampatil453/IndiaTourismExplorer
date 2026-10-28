@@ -85,4 +85,39 @@ public class FavoriteService : IFavoriteService
             CreatedAt = x.CreatedAt
         }).ToList();
     }
+    // Add to existing FavoriteService, with existing _repo: IFavoriteRepository
+    public async Task<List<int>> GetMineIdsAsync(string userId)
+    {
+       return (await _repository.ListMineAsync(userId))
+            .Select(x => x.TouristPlaceId).ToList();
+    }
+    public async Task<bool> ExistsAsync(string userId, int placeId)
+    {
+       return await _repository.FindMineAsync(userId, placeId) is not null;
+    }
+    public async Task<bool> AddMineAsync(string userId, int placeId)
+    {
+        if (!await _repository.PlaceExistsAsync(placeId)) return false;
+        if (await _repository.FindMineAsync(userId, placeId) is not null)
+            return true; // idempotent
+        await _repository.AddAsync(new Favorite
+        {
+            UserId = userId,
+            TouristPlaceId = placeId
+        });
+        await _repository.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> RemoveMineAsync(string userId, int placeId)
+    {
+        var favorite = await _repository.FindMineAsync(userId, placeId);
+        if (favorite is null) return false;
+        _repository.Remove(favorite);
+        await _repository.SaveChangesAsync();
+        return true;
+    }
+
+    public Task<List<FavoriteSummaryDto>> GetSummaryAsync() =>
+        _repository.SummaryAsync();
 }

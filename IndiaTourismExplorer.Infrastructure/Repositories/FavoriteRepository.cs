@@ -1,4 +1,5 @@
-﻿using IndiaTourismExplorer.Application.Interfaces;
+﻿using IndiaTourismExplorer.Application.DTOs;
+using IndiaTourismExplorer.Application.Interfaces;
 using IndiaTourismExplorer.Domain.Entities;
 using IndiaTourismExplorer.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -48,5 +49,33 @@ public class FavoriteRepository : IFavoriteRepository
     public async Task SaveChangesAsync()
     {
         await _context.SaveChangesAsync();
+    }
+
+    // Add to existing FavoriteRepository, using existing _db: TourismDbContext
+    public Task<List<Favorite>> ListMineAsync(string userId)
+    {
+        return _context.Favorites.AsNoTracking()
+            .Where(x => x.UserId == userId)
+            .ToListAsync();
+    }
+
+    public Task<Favorite?> FindMineAsync(string userId, int placeId)
+    {
+        return _context.Favorites.FirstOrDefaultAsync(x =>
+            x.UserId == userId && x.TouristPlaceId == placeId);
+    }
+    public Task<bool> PlaceExistsAsync(int placeId)
+    {
+        return _context.TouristPlaces.AnyAsync(x => x.TouristPlaceId == placeId);
+    }
+    public Task<List<FavoriteSummaryDto>> SummaryAsync()
+    {
+       return _context.Favorites.AsNoTracking()
+            .GroupBy(x => x.TouristPlaceId)
+            .Select(g => new FavoriteSummaryDto
+            {
+                TouristPlaceId = g.Key,
+                FavoriteCount = g.Count()
+            }).ToListAsync();
     }
 }

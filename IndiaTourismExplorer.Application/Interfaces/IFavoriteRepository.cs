@@ -1,4 +1,5 @@
-﻿using IndiaTourismExplorer.Domain.Entities;
+﻿using IndiaTourismExplorer.Application.DTOs;
+using IndiaTourismExplorer.Domain.Entities;
 
 namespace IndiaTourismExplorer.Application.Interfaces;
 
@@ -16,4 +17,8 @@ public interface IFavoriteRepository
     void Remove(Favorite favorite);
 
     Task SaveChangesAsync();
+    Task<List<Favorite>> ListMineAsync(string userId);
+    Task<Favorite?> FindMineAsync(string userId, int placeId);
+    Task<List<FavoriteSummaryDto>> SummaryAsync();
+    Task<bool> PlaceExistsAsync(int placeId);
 }

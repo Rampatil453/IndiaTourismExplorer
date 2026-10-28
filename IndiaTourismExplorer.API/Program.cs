@@ -208,6 +208,15 @@ builder.Services.AddScoped<IAdminVisitingInformationRepository, AdminVisitingInf
 builder.Services.AddScoped<IAdminVisitingInformationService, AdminVisitingInformationService>();
 builder.Services.AddScoped<IAdminTravelOptionRepository, AdminTravelOptionRepository>();
 builder.Services.AddScoped<IAdminTravelOptionService, AdminTravelOptionService>();
+builder.Services.AddScoped<IAdminNearbyPlaceRepository, AdminNearbyPlaceRepository>();
+builder.Services.AddScoped<IAdminNearbyPlaceService, AdminNearbyPlaceService>();
+builder.Services.AddScoped<IAdminReviewRepository, AdminReviewRepository>();
+builder.Services.AddScoped<IAdminReviewService, AdminReviewService>();
+builder.Services.AddScoped<ITripRepository, TripRepository>();
+builder.Services.AddScoped<ITripService, TripService>();
+builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+
 var app = builder.Build();
 
 

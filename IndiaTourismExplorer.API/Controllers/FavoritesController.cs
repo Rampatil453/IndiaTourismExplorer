@@ -7,7 +7,7 @@ using System.Security.Claims;
 namespace IndiaTourismExplorer.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/")]
 [Authorize]
 public class FavoritesController : ControllerBase
 {
@@ -17,6 +17,8 @@ public class FavoritesController : ControllerBase
     {
         _favoriteService = favoriteService;
     }
+    private string? UserId => User.FindFirstValue(ClaimTypes.NameIdentifier)
+       ?? User.FindFirstValue("sub");
 
     [HttpPost("{touristPlaceId:int}")]
     public async Task<IActionResult> AddFavorite(int touristPlaceId)
@@ -113,5 +115,32 @@ public class FavoritesController : ControllerBase
             touristPlaceId,
             isFavorite
         });
+    }
+    [HttpGet]
+    public async Task<IActionResult> Mine()
+    {
+        return UserId is { } uid
+            ? Ok(await _favoriteService.GetMineIdsAsync(uid)) : Unauthorized();
+    }
+    [HttpGet("{id:int}/exists")]
+    public async Task<IActionResult> Exists(int id)
+    {
+        return UserId is { } uid
+                ? Ok(new { isFavorite = await _favoriteService .ExistsAsync(uid, id) })
+                : Unauthorized();
+    }
+    [HttpPost("{id:int}")]
+    public async Task<IActionResult> Add(int id)
+    {
+        if (UserId is not { } uid) return Unauthorized();
+        return await _favoriteService.AddMineAsync(uid, id)
+            ? Ok(new { isFavorite = true }) : NotFound();
+    }
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Remove(int id)
+    {
+        if (UserId is not { } uid) return Unauthorized();
+        return await _favoriteService.RemoveMineAsync(uid, id)
+            ? NoContent() : NotFound();
     }
 }

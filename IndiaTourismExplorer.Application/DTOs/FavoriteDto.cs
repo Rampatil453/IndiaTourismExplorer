@@ -10,3 +10,8 @@ public class FavoriteDto
 
     public DateTime CreatedAt { get; set; }
 }
+public sealed class FavoriteSummaryDto
+{
+    public int TouristPlaceId { get; set; }
+    public int FavoriteCount { get; set; }
+}
